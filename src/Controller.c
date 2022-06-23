@@ -99,7 +99,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger, eTipoPass* tipo, in
 	int todoOk = -1;
 		if(pArrayListPassenger != NULL)
 		{
-			if(controller_overWriteData(pArrayListPassenger) == 0)
+			if(controller_ListaVacia(pArrayListPassenger) == 0)
 			{
 				printf("Se ha cancelado la operacion\n\n");
 			}
@@ -319,67 +319,22 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 }
 
 
-int controller_overWriteData(LinkedList* pArrayListPassenger)
+int controller_ListaVacia(LinkedList* pArrayListPassenger)
 {
-		int todoOk;
-		int option;
-		if(ll_isEmpty(pArrayListPassenger) == 1)
-		{
-			printf("No se cargo la lista previamente\n¿Estas seguro que quieres dar el alta a un empleado?\nPuede que los datos se sobrescriban\n1-Continuar\n2-Volver al menu\n ");
-			option=EnterNumberInt("Selecciona una opcion: ", "\nError, selecciona una opcion valida\n", 2,1);
-			switch(option)
-			{
-			case 1:
-				todoOk =-1;
-				break;
-			case 2:
-				todoOk = 0;
-			}
-		}
-		return todoOk;
-	}
-
-int controller_overWriteText(LinkedList* pArrayListPassenger)
-{
+	int todoOk;
 	int option;
-	int todoOk = 0;
-
-	printf("Estas a punto de sobrescribir los datos en la lista, ¿Deseas continuar?\n1-Continuar\n2-Volver al menu principal\n");
-	option=EnterNumberInt("Selecciona una opcion: ", "\nError, selecciona una opcion valida\n", 2,1);
-
-	switch(option)
+	if(ll_isEmpty(pArrayListPassenger) == 1)
 	{
+		printf("No se cargo la lista previamente\n¿Estas seguro que quieres dar el alta a un empleado?\nPuede que los datos se sobrescriban si luego guarda\n1-Continuar\n2-Volver al menu\n ");
+		option=EnterNumberInt("Selecciona una opcion: ", "\nError, selecciona una opcion valida\n", 2,1);
+		switch(option)
+		{
 		case 1:
-		  if(controller_saveAsText("data.csv", pArrayListPassenger) == 0)
-		  {
-			  todoOk = 1;
-			  printf("\nSe guardo correctamente el archivo\n\n");
-		  }
-		  break;
-			case 2:
-		break;
+			todoOk =-1;
+			break;
+		case 2:
+			todoOk = 0;
+		}
 	}
 	return todoOk;
-}
-int controller_overWriteBin(LinkedList* pArrayListPassenger)
-{
-	int opcion;
-	int todoOk = 0;
-
-	printf("Estas a punto de sobrescribir los datos de la lista que se ha cargado, ¿Deseas continuar?\n1-CONTINUAR\n2-SALIR\n");
-	opcion=EnterNumberInt("Selecciona una opcion: ", "\nError, selecciona una opcion valida\n", 2,1);
-
-	switch(opcion)
-	{
-	  case 1:
-		 if(controller_saveAsBinary("data.bin", pArrayListPassenger) == 0)
-		 {
-			 todoOk = -1;
-			  printf("\nSe guardo correctamente el archivo\n\n");
-		 }
-	  break;
-	  case 2:
-		  break;
-	}
-	   return todoOk;
 }

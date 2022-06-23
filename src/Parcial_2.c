@@ -9,8 +9,8 @@
 
 int main()
 {
-	eTipoPass tipos [TAM_TIPO]= {{1,"FirstClass"},{2,"ExecutiveClass"},{3,"EconomyClass"}};
 	eEstadoPass estados[TAM_ESTADO]= {{1,"Aterrizado"},{2,"En Horario"},{3,"En Vuelo"},{4,"Demorado"}};
+	eTipoPass tipos [TAM_TIPO]= {{1,"FirstClass"},{2,"ExecutiveClass"},{3,"EconomyClass"}};
 
 	int option = 0;
 	int flagSave = -1;
