@@ -20,7 +20,7 @@ int main()
 	LinkedList* listaPasajeros = ll_newLinkedList();
 	do{
 		controller_Menu();
-		option = EnterNumberInt("Ingrese una opcion: ", "Error, Ingrese una opcion valida: ", 10, 1);
+		option = EnterNumberInt("Ingrese una opcion: ", "Error, Ingrese una opcion valida: ", 110, 1);
 
 		switch(option)
 		{
@@ -149,7 +149,14 @@ int main()
 					printf("Primero debe guardar\n");
 				}
 				break;
+			case 20:
+					controller_GenerarArchivoVuelo(listaPasajeros, "ARCHIVO_VUELO.csv");
+					controller_PasajerosPorClase(listaPasajeros);
+				break;
 		}
 	}while(option != 11);
 	return 0;
 }
+//analizar clase
+//analizar codigo de vuelo
+//analizar precio y clase

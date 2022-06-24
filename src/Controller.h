@@ -103,5 +103,7 @@ int controller_exit(LinkedList* pArrayListPassenger, int flagSave);
 /// @param pArrayListPassenger
 /// @return
 int controller_ListaVacia(LinkedList* pArrayListPassenger);
-
+int controller_GenerarArchivoVuelo(LinkedList* pArrayListPassenger, char* path);
+int controller_PasajerosPorClase(LinkedList* pArrayListPassenger);
+void calcularMillas (void* element);
 #endif  /* CONTROLLER_H_ */

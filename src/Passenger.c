@@ -53,6 +53,19 @@ int Passenger_setId(Passenger* this,int id)
 }
 
 
+int Passenger_getMillas(Passenger* this,float* millas)
+{
+
+	int todoOk = -1;
+
+	if(this != NULL)
+	{
+		*millas = this->millas;
+		todoOk = 0;
+	}
+
+	return todoOk;
+}
 int Passenger_getId(Passenger* this,int* id)
 {
 
@@ -131,6 +144,8 @@ int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo)
 	return todoOk;
 }
 
+
+
 int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo)
 {
 	int todoOk = -1;
@@ -156,6 +171,20 @@ int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero)
 
 	return todoOk;
 }
+
+int Passenger_setMillas(Passenger* this,float millas)
+{
+	int todoOk = -1;
+
+	if (this != NULL )
+	{
+		this->millas = millas;
+		todoOk = 0;
+	}
+
+	return todoOk;
+}
+
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero)
 {
 	int todoOk = -1;
@@ -814,6 +843,70 @@ int ordenarPrecioMenu(LinkedList* pArrayListPassenger)
 				todoOk = ll_sort(pArrayListPassenger, ordenarPrecio, 0);
 			break;
 
+	}
+	return todoOk;
+}
+
+int filtrarPorTipo (void* pasajero)
+{
+
+	int todoOk = 0;
+	int idTipo;
+
+	Passenger_getTipoPasajero(pasajero, &idTipo);
+
+	if(pasajero != NULL && idTipo == 2)
+	{
+		todoOk = 1;
+	}
+
+	return todoOk;
+}
+
+int contarPrim(void* pPassenger)
+{
+
+	int todoOk = 0;
+	int tipoPasajero;
+
+	if(Passenger_getTipoPasajero(pPassenger,&tipoPasajero) == 0)
+	{
+		if(tipoPasajero == 1)
+		{
+			todoOk = 1;
+		}
+	}
+	return todoOk;
+}
+
+int contarExe(void* pPassenger)
+{
+
+	int todoOk = -0;
+	int tipoPasajero;
+
+	if(Passenger_getTipoPasajero(pPassenger,&tipoPasajero) == 0)
+	{
+		if(tipoPasajero == 2)
+		{
+			todoOk = 1;
+		}
+	}
+	return todoOk;
+}
+
+int contarEco(void* pPassenger)
+{
+
+	int todoOk = -1;
+	int tipoPasajero;
+
+	if(Passenger_getTipoPasajero(pPassenger,&tipoPasajero) == 0)
+	{
+		if(tipoPasajero == 3)
+		{
+			todoOk = 1;
+		}
 	}
 	return todoOk;
 }

@@ -550,3 +550,96 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 
 	return returnAux;
 }
+
+//La función “ll_count” recibirá una lista y una función “fn”. Se deberá iterar todos los elementos
+//de la lista y pasárselos a la funcion “fn”. La función “fn” devolverá la cantidad que debe
+//contarse. La función “ll_count” almacenará un acumulador al cual sumará el valor de retorno
+//de “fn” en cada iteración. Al finalizar las iteraciones, la función “ll_count” devolverá el valor
+//acumulado.
+
+
+int ll_count(LinkedList* this, int (*fn)(void* element))
+{
+	int todoOk = 0;
+	int tam;
+	void* pElemento = NULL;
+
+	tam=ll_len(this);
+
+	if(this!=NULL)
+	{
+		for(int i = 0; i< tam; i++)
+		{
+			pElemento = ll_get(this, i);
+
+			if(fn(pElemento) == 1)
+			{
+				todoOk++;
+			}
+		}
+	}
+	return todoOk;
+}
+
+//Prototipo de la función: LinkedList* ll_filter(LinkedList* this, void (*fn)(void* element))
+//La función “ll_filter” recibirá una lista y una función “fn”. Se deberá iterar todos los elementos
+//de la lista y pasárselos a la función “fn”. La función “fn” analizará el elemento recibido e
+//informará si cumple o no con el criterio establecido. Al finalizar la iteración, la nueva lista
+//estará conformada sólo por los elementos que corresponden.
+
+
+LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element))
+{
+
+	LinkedList* nuevaLista = NULL;
+	int tam;
+	void* pElement = NULL;
+	tam = ll_len(this);
+	nuevaLista =  ll_newLinkedList();
+
+	if(nuevaLista != NULL)
+	{
+		for(int i = 0; i<tam; i++)
+		{
+			pElement = ll_get(this, i);
+
+			if(fn(pElement) == 1)
+			{
+				ll_add(nuevaLista, pElement);
+			}
+		}
+	}
+	return nuevaLista;
+}
+
+//Prototipo de la función: LinkedList* ll_map(LinkedList* this, void (*fn)(void* element))
+//La función “ll_map” recibirá una lista y una función “fn”. Se deberá iterar todos los elementos
+//de la lista y pasárselos a la función “fn”. La función “fn” podrá realizar un cálculo con el
+//elemento recibido y modificar alguno de sus campos si es necesario. Al finalizar la iteración,
+//los elementos de la lista quedarán modificados.
+
+
+LinkedList* ll_map(LinkedList* this, void (*fn)(void* element))
+{
+	LinkedList* ListaConDescuento = NULL;
+	int tam;
+	void* pElemento = NULL;
+	tam = ll_len(this);
+
+	ListaConDescuento = ll_newLinkedList();
+
+	if(ListaConDescuento != NULL && this != NULL)
+	{
+		for(int i = 0; i < tam; i++)
+		{
+			pElemento = ll_get(this, i);
+
+			if(pElemento != NULL )
+			{
+				fn(pElemento);
+				ll_add(ListaConDescuento, pElemento);
+			}
+		}
+	}
+	return ListaConDescuento;
+}

@@ -17,6 +17,7 @@ typedef struct
 	char codigoVuelo[50];
 	int tipoPasajero;
 	int isEmpty;
+	float millas;
 
 }Passenger;
 
@@ -115,6 +116,8 @@ int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo);
 /// @param this
 /// @param tipoPasajero
 /// @return
+///
+
 int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero);
 
 /// @brief Getter del tipo de pasajero
@@ -122,6 +125,8 @@ int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero);
 /// @param this
 /// @param tipoPasajero
 /// @return
+int Passenger_getMillas(Passenger* this,float* millas);
+int Passenger_setMillas(Passenger* this,float millas);
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero);
 
 /// @brief Setter del precio
@@ -324,5 +329,9 @@ int ordenarApellidoMenu(LinkedList* pArrayListPassenger);
 /// @param pArrayListPassenger
 /// @return
 int ordenarPrecioMenu(LinkedList* pArrayListPassenger);
+int filtrarPorTipo (void* pasajero);
+int contarPrim(void* pPassenger);
+int contarExe(void* pPassenger);
+int contarEco(void* pPassenger);
 
 #endif /* PASSENGER_H_ */

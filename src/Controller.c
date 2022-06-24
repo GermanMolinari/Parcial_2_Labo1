@@ -338,3 +338,99 @@ int controller_ListaVacia(LinkedList* pArrayListPassenger)
 	}
 	return todoOk;
 }
+
+int controller_GenerarArchivoVuelo(LinkedList* pArrayListPassenger, char* path)
+{
+	int todoOk = 0;
+	LinkedList* listaFiltrada = NULL;
+	FILE* pArchivo = NULL;
+
+
+	if(pArrayListPassenger != NULL && ll_isEmpty(pArrayListPassenger) != 1)
+	{
+		listaFiltrada = ll_filter(pArrayListPassenger, filtrarPorTipo);
+
+		if(listaFiltrada != NULL)
+		{
+			pArchivo = fopen(path ,"w");
+
+			if(pArchivo != NULL)
+			{
+				todoOk = controller_saveAsText(path, listaFiltrada);
+			}
+			fclose(pArchivo);
+		}
+	}
+
+	return todoOk;
+}
+
+int controller_PasajerosPorClase(LinkedList* pArrayListPassenger)
+{
+	int todoOk = 0;
+	int contadorPrim = 0;
+	int contadoExe = 0;
+	int contadorEco = 0;
+
+	if(pArrayListPassenger != NULL)
+	{
+		contadorPrim = ll_count(pArrayListPassenger,contarPrim);
+		contadorEco = ll_count(pArrayListPassenger,contarEco);
+		contadoExe = ll_count(pArrayListPassenger,contarExe);
+
+		printf("La cantidad de pasajeros en PrimaryClass es %d, la cantidad en ExecutiveClass es %d, y la cantidad en EcnomicClass es %d",contadorPrim,contadoExe,contadorEco);
+	}
+
+	return todoOk;
+}
+
+
+int controller_calcularMillas(LinkedList* pArrayListPassenger)
+{
+	int todoOk = 0;
+
+	if(pArrayListPassenger != NULL)
+	{
+		ll_map(pArrayListPassenger, calcularMillas);
+	}
+
+	return todoOk;
+}
+
+void calcularMillas (void* element)
+{
+	Passenger* pPass;
+	int tipoPasajero;
+	float precio;
+	float millas;
+
+	if(Passenger_getTipoPasajero(pPass,&tipoPasajero) == 0)
+	{
+		if(tipoPasajero == 1)
+		{
+			if(Passenger_getPrecio(pPass, &precio) == 0)
+			{
+				millas = precio / 100;
+				millas = millas * 2;
+				Passenger_setMillas(pPass, millas);
+			}
+		}
+		else if (tipoPasajero == 2)
+		{
+			if(Passenger_getPrecio(pPass, &precio) == 0)
+			{
+				millas = precio / 100;
+				millas = millas * 3;
+				Passenger_setMillas(pPass, millas);
+			}
+		}
+		else
+		{
+			if(Passenger_getPrecio(pPass, &precio) == 0)
+			{
+				millas = precio / 100;
+				Passenger_setMillas(pPass, millas);
+			}
+		}
+	}
+}
